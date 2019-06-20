@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Emusic8055/node_MQ_connection#readme",
   "dependencies": {
-    "ibmmq": "^0.9.5"
+    "ibmmq": "^0.9.5",
+    "mqlight": "^2.0.2019041500"
   }
 }
