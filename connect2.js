@@ -45,28 +45,41 @@
         var od = new mq.MQOD();
         od.ObjectName = qName;
         od.ObjectType = MQC.MQOT_Q;
-        var openOptions = MQC.MQOO_OUTPUT;
-        mq.Stat(hConn, od, function (err, hObj1) {
-            console.log("MQOPEN of %s successful", qName);
-            if (err) {
-              console.log(formatErr(err));
-            } else {
-                console.log(hObj1.Stat);
-              console.log("MQOPEN of %s successful", qName);
-
-              //putMessage(hObj);
-            }
-           // cleanup(hConn, hObj);
-          });
+        var openOptions = MQC.Stat;
+        console.log(mq.Lookup('MQIA', 3));
         
         mq.Open(hConn, od, openOptions, function (err, hObj) {
           if (err) {
             console.log(formatErr(err));
           } else {
             console.log("MQOPEN of %s successful", qName);
-            putMessage(hObj);
+            console.log('ededd ' + mq.Lookup('MQIA', 3));
+            getStatus(hConn,od);
+           // putMessage(hObj);
           }
          // cleanup(hConn, hObj);
         });
       }
     });
+
+
+
+    function getStatus(hObj,od) {
+      //  var msg = Buffer.from(JSON.stringify(coff));
+      var msg = "testsdgfhsdgf"
+      // Describe how the Put should behave
+  
+        pmo.Options = MQC.MQPMO_NO_SYNCPOINT |
+                      MQC.MQPMO_NEW_MSG_ID |
+                      MQC.MQPMO_NEW_CORREL_ID;
+    
+        mq.Stat(hObj,od,function(err) {
+          if (err) {
+              console.log("test");
+            console.log(formatErr(err));
+          } else {
+              console.log("test");
+            console.log("MQPUT successful");
+          }
+        });
+      }
